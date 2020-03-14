@@ -1,0 +1,6 @@
+# files to ignore
+
+# all pics
+*.png
+*.jpg
+__pycache__/*
