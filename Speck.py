@@ -17,7 +17,9 @@ class Speck:
 		"land": (0, 255, 0),
 		"rock": (127, 127, 127),
 	}
-	color = ()
 
 	def __init__(self, terr = "land"):
-		self.color = self.terrColo[terr]
+		self.terrType = terr
+
+	def color(self):
+		return self.terrColo[self.terrType]
