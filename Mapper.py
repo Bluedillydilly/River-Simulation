@@ -37,7 +37,7 @@ class Mapper:
 		for x in range(mapN.size[0]):
 			for y in range(mapN.size[1]):
 				pixels[x,y] = Speck.terrColo["land"]
-				print(x, ",", y, "changed to",pixels[x,y])
+				print(x, ",", y, "changed to", pixels[x,y])
 
 	def drawRiver(self, mapN):
 		# array representation of a map

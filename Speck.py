@@ -18,8 +18,17 @@ class Speck:
 		"rock": (127, 127, 127),
 	}
 
-	def __init__(self, terr = "land"):
-		self.terrType = terr
+	coloTerr = {
+		v: k for k, v in terrColo.items()
+	}
+
+	def __init__(self, terr, colo):
+		if terr:
+			self.terrType = terr
+		elif not terr and colo:
+			self.terrType = self.terrColo[colo]
+		else:
+			self.terrType = "land"
 
 	def color(self):
 		return self.terrColo[self.terrType]

@@ -7,6 +7,7 @@
 """
 
 from Speck import Speck
+from PIL import Image
 
 class TMap:
 	"""
@@ -14,32 +15,37 @@ class TMap:
 	"""
 
 	name = ""
-	mapImg = []
 	terrain = []
 	mapID = -1
 	size = (-1,-1)
 
-	def __init__(self, name, mapImg, specks = [], mapID = -1):
+	def __init__(self, name, map = [], mapID = -1):
 		self.name = name
-		self.terrain = specks
 		self.mapID = mapID
-		self.mapImg = mapImg
-		self.size = mapImg.size
+		if map:
+			self.size = map.size
+			self._tFromMap(map)
 
-	def updateMap(self):
-		upPixels = [[(0,0,0) for y in self.size[1]] for x in self.size[0]]
+	def _tFromMap(self, map):
+		mapPixels = list(map.getdata())
+		newT = [[(0,0,0) for p in self.size[1]] for r in self.size[0]]
 		for x in self.size[0]:
 			for y in self.size[1]:
-				upPixels[x,y] = self.terrain[x,y].color()	
-
-	def updateTerrain(self, newT):
+				newT.append(Speck(terr = [], 
+				colo = mapPixels[x][y]))
 		self.terrain = newT
 
-	def loadMap(self):
+	def _cMap(self):
+		colors = [[sp.color() for sp in r] for r in self.terrain]
+		return colors
+
+
+
+	def getColors(self):
 		"""
 			get the array representation of a map
 		"""
-		return self.mapImg.load()
+		return self._cMap()
 
 	def saveToFile(self):
 		"""
