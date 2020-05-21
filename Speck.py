@@ -12,23 +12,30 @@ class Speck:
 	#TODO implement terrainSlices
 	#terrainSlice = []
 
+	# color of the terrain
+	# terrain type -> color tuple
 	terrColo = {
 		"water": (0,0,255),
 		"land": (0, 255, 0),
 		"rock": (127, 127, 127),
 	}
 
+	# inverse of terrColo
+	# color tuple -> terrain type	
 	coloTerr = {
 		v: k for k, v in terrColo.items()
 	}
+
+	terrType = "land"
 
 	def __init__(self, terr, colo):
 		if terr:
 			self.terrType = terr
 		elif not terr and colo:
 			self.terrType = self.terrColo[colo]
-		else:
-			self.terrType = "land"
 
-	def color(self):
+	def getColor(self):
 		return self.terrColo[self.terrType]
+
+	def getTerrain(self):
+		return self.terrType
